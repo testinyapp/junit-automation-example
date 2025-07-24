@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <!-- Suites are mapped as folders -->
+    <testsuite name="Suite1">
+        <!-- 
+          Class name prefixes can be stripped from test names if needed 
+          'classname' can also be ignored if needed (only the test name is used in that case)
+        -->
+        <testcase name="Tests.Suite1.TestCase1" classname="Tests.Suite1" />
+    </testsuite>
+    <testsuite name="Suite2">
+        <!-- Suites can be nested -->
+        <testsuite name="Suite2.InnerSuite1">
+            <testcase name="TestCase2" classname="Tests.Suite2.InnerSuite1">
+                <failure message="It failed">A detailed error message why it failed</failure>
+                <!-- 
+                  Error output is added as error message for non-passed testcases.
+                  If the content is too long, it will be added as an attachment
+                -->
+                <system-err>
+                   Oh no an error happened while doing the thing!
+                   at processFunc (src/foo.ts:323:22)
+                   at main (src/bar.ts:12:1)
+                </system-err>
+            </testcase>
+            <testcase name="TestCase3" classname="Tests.Suite2.InnerSuite1" />
+        </testsuite>
+        <testcase name="TestCase4" classname="Tests.Suite2">
+            <failure message="The actual error message" type="Error">
+            </failure>
+            <!-- 
+              Attachments can be added inline with Jenkins-style markers  
+              File paths must be either absolute or relative to the junit file
+            -->
+            <system-err>[[ATTACHMENT|./screenshots/tc-4-xyz.jpg|Unused Part]]</system-err>
+        </testcase>
+        <!-- Result status is normally set via child tags -->
+        <testcase name="TestCase5" classname="Tests.Suite2">
+            <skipped/>
+        </testcase>
+        <!-- Result status can also be set via the 'status' attribute -->
+        <testcase name="TestCase5" classname="Tests.Suite2" status="blocked">
+        </testcase>
+        <testcase name="TestCase6" classname="Tests.Suite2">
+            <!-- 
+              Output is added as result message for passed testcases 
+              If the content is too long, it will be added as an attachment
+            -->
+            <system-out>
+                This is just some informational text the TC passed just fine
+            </system-out>
+            <properties>
+                <!-- 
+                  Used automatically for identifying tests
+                  the id must be unique per testiny automation source
+                  If the testcase is renamed or moved around, it will still map to the
+                  same automation test case in testiny as long as the test id remains unchanged
+                 -->
+                <property name="testid" value="unique_testid_value_12345"/>
+                <!--
+                  Extra properties can be included as fields when importing by specifying the name
+                  in the CLI using 'custom-result-fields' option
+                -->
+                <property name="custom_prop" value="value for import"/>
+            </properties>
+        </testcase>
+    </testsuite>
+</testsuites>
