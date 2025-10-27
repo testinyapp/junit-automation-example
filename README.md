@@ -21,10 +21,10 @@ Suite and class names like `com.example.tests.MyTest` can be interpreted as:
 <testcase classname="com.example.tests.MyTest" name="MyTest.testLogin"/>
 ```
 
-The following CLI options can be used to control naming:
-`--junit-strip-classname-prefix <prefix>` allows removing a prefix from the classname (e.g. redundant namespaces)
-`--junit-ignore-classname` excludes the "classname" attribute from the test case title
-`--junit-classname-as-folder <single|nested>` controls if folders are created in a nested hierarchy from namespaces or as a flat list
+The following CLI options can be used to control naming:  
+`--junit-strip-classname-prefix <prefix>` allows removing a prefix from the classname (e.g. redundant namespaces)  
+`--junit-ignore-classname` excludes the "classname" attribute from the test case title  
+`--junit-classname-as-folder <single|nested>` controls if folders are created in a nested hierarchy from namespaces or as a flat list  
 
 ### Test Status
 
@@ -58,9 +58,18 @@ The time unit for the duration can also be set using the CLI:
 
 ### Attachments
 
-Testiny supports embedded attachment markers in system output/error (Jenkins-style):
+Testiny supports embedded attachment markers in system output/error (Jenkins-style) and attachments as properties:
 
-``[[ATTACHMENT|./screenshots/tc-4-xyz.jpg|Title]]``
+```xml
+[[ATTACHMENT|./screenshots/tc-4-xyz.jpg|Title]]
+```
+
+```xml
+<properties>
+  <property name="attachment" value="test-failed-2.png" />
+  <property name="attachment" value="test-failed-3.png" />
+</properties>
+```
 
 ### Custom Properties
 

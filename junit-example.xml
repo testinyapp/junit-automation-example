@@ -62,6 +62,10 @@
                   in the CLI using 'custom-result-fields' option
                 -->
                 <property name="custom_prop" value="value for import"/>
+                <!--
+                  Attachments can also be added using properties
+                -->
+                <property name="attachment" value="my-attachment.png" />
             </properties>
         </testcase>
     </testsuite>
